@@ -1,0 +1,54 @@
+server:
+  port: 13900
+  servlet:
+    context-path: /igood
+spring:
+  datasource:
+    name: igood
+    url: jdbc:postgresql://39.108.53.188:6038/hambook
+    username: postgres
+    password: hambook188
+    driver-class-name: org.postgresql.Driver
+    # 使用druid数据源
+    type: com.alibaba.druid.pool.DruidDataSource
+    filters: stat
+    maxActive: 20
+    initialSize: 1
+    maxWait: 60000
+    minIdle: 1
+    timeBetweenEvictionRunsMillis: 60000
+    minEvictableIdleTimeMillis: 300000
+    validationQuery: select 'x'
+    testWhileIdle: true
+    testOnBorrow: false
+    testOnReturn: false
+    poolPreparedStatements: true
+    maxOpenPreparedStatements: 20
+
+mybatis:
+  mapper-locations: classpath:mapping/*.xml
+  type-aliases-package: com.mtty.igood.model
+
+#输出SQL日志
+logging:
+  file: logs/debug.log
+  level:
+    com:
+      mtty:
+        igood:
+          dao: debug
+
+# 微信小程序
+wechat:
+  appid: wxfa1580ce6dd3cea9
+  secret: 13576156941a170910adb4bc9201a1f9
+  # 客服
+  contact:
+    token: gaozs
+  # api接口
+  api:
+    jscode2session: https://api.weixin.qq.com/sns/jscode2session
+
+
+
+

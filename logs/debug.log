@@ -1,0 +1,4 @@
+2018-05-18 18:46:08.978  INFO 34778 --- [Thread-35] ConfigServletWebServerApplicationContext : Closing org.springframework.boot.web.servlet.context.AnnotationConfigServletWebServerApplicationContext@4df59875: startup date [Wed May 02 09:35:59 CST 2018]; root of context hierarchy
+2018-05-18 18:46:09.044  INFO 34778 --- [Thread-35] o.s.j.e.a.AnnotationMBeanExporter        : Unregistering JMX-exposed beans on shutdown
+2018-05-18 18:46:09.045  INFO 34778 --- [Thread-35] o.s.j.e.a.AnnotationMBeanExporter        : Unregistering JMX-exposed beans
+2018-05-18 18:46:09.052  INFO 34778 --- [Thread-35] com.alibaba.druid.pool.DruidDataSource   : {dataSource-1} closed

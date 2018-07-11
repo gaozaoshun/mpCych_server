@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.mtty.igood.dao.ProdBuyRecordMapper" >
+  <resultMap id="BaseResultMap" type="com.mtty.igood.model.ProdBuyRecord" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="uid" property="uid" jdbcType="INTEGER" />
+    <result column="pid" property="pid" jdbcType="INTEGER" />
+    <result column="buy_num" property="buyNum" jdbcType="INTEGER" />
+    <result column="in_time" property="inTime" jdbcType="TIMESTAMP" />
+    <result column="nickname" property="nickname" jdbcType="VARCHAR" />
+    <result column="avatar" property="avatar" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, uid, pid, buy_num, in_time, nickname, avatar
+  </sql>
+  <select id="queryByPid" resultMap="BaseResultMap" >
+    SELECT *
+    from prod_buy_record
+    WHERE pid = ${pid}
+    ORDER BY in_time DESC
+    limit ${offset} offset ${start}
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from prod_buy_record
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from prod_buy_record
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.mtty.igood.model.ProdBuyRecord" >
+    insert into prod_buy_record (id, uid, pid, 
+      buy_num, in_time, nickname, 
+      avatar)
+    values (#{id,jdbcType=INTEGER}, #{uid,jdbcType=INTEGER}, #{pid,jdbcType=INTEGER}, 
+      #{buyNum,jdbcType=INTEGER}, #{inTime,jdbcType=TIMESTAMP}, #{nickname,jdbcType=VARCHAR}, 
+      #{avatar,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.mtty.igood.model.ProdBuyRecord" >
+    insert into prod_buy_record
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="uid != null" >
+        uid,
+      </if>
+      <if test="pid != null" >
+        pid,
+      </if>
+      <if test="buyNum != null" >
+        buy_num,
+      </if>
+      <if test="inTime != null" >
+        in_time,
+      </if>
+      <if test="nickname != null" >
+        nickname,
+      </if>
+      <if test="avatar != null" >
+        avatar,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="uid != null" >
+        #{uid,jdbcType=INTEGER},
+      </if>
+      <if test="pid != null" >
+        #{pid,jdbcType=INTEGER},
+      </if>
+      <if test="buyNum != null" >
+        #{buyNum,jdbcType=INTEGER},
+      </if>
+      <if test="inTime != null" >
+        #{inTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="nickname != null" >
+        #{nickname,jdbcType=VARCHAR},
+      </if>
+      <if test="avatar != null" >
+        #{avatar,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.mtty.igood.model.ProdBuyRecord" >
+    update prod_buy_record
+    <set >
+      <if test="uid != null" >
+        uid = #{uid,jdbcType=INTEGER},
+      </if>
+      <if test="pid != null" >
+        pid = #{pid,jdbcType=INTEGER},
+      </if>
+      <if test="buyNum != null" >
+        buy_num = #{buyNum,jdbcType=INTEGER},
+      </if>
+      <if test="inTime != null" >
+        in_time = #{inTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="nickname != null" >
+        nickname = #{nickname,jdbcType=VARCHAR},
+      </if>
+      <if test="avatar != null" >
+        avatar = #{avatar,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.mtty.igood.model.ProdBuyRecord" >
+    update prod_buy_record
+    set uid = #{uid,jdbcType=INTEGER},
+      pid = #{pid,jdbcType=INTEGER},
+      buy_num = #{buyNum,jdbcType=INTEGER},
+      in_time = #{inTime,jdbcType=TIMESTAMP},
+      nickname = #{nickname,jdbcType=VARCHAR},
+      avatar = #{avatar,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

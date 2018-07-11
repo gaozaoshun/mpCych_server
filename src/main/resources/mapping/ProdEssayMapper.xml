@@ -1,0 +1,208 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mtty.igood.dao.ProdEssayMapper">
+  <resultMap id="BaseResultMap" type="com.mtty.igood.model.ProdEssay">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="cover" jdbcType="VARCHAR" property="cover" />
+    <result column="title" jdbcType="VARCHAR" property="title" />
+    <result column="content" jdbcType="VARCHAR" property="content" />
+    <result column="in_time" jdbcType="TIMESTAMP" property="inTime" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+    <result column="browser_num" jdbcType="INTEGER" property="browserNum" />
+    <result column="send_num" jdbcType="INTEGER" property="sendNum" />
+    <result column="collect_num" jdbcType="INTEGER" property="collectNum" />
+    <result column="prod_ids" jdbcType="VARCHAR" property="prodIds" />
+    <result column="descp" jdbcType="VARCHAR" property="descp" />
+    <result column="author" jdbcType="VARCHAR" property="author" />
+    <result column="avatar" jdbcType="VARCHAR" property="avatar" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, cover, title, content, in_time, update_time, browser_num, send_num, collect_num,
+    prod_ids, descp,author,avatar
+  </sql>
+  <select id="queryField" resultMap="BaseResultMap">
+    SELECT
+    <include refid="Base_Column_List"/>
+    from prod_essay
+    where title like '%${field}%'
+    order by browser_num desc
+    limit ${offset} offset ${start}
+  </select>
+  <select id="queryHot" resultMap="BaseResultMap">
+    SELECT
+    <include refid="Base_Column_List"/>
+    from prod_essay
+    order by browser_num desc
+    limit ${offset} offset ${start}
+  </select>
+  <select id="queryByIds" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from prod_essay
+    where id in (${ids})
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from prod_essay
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from prod_essay
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.mtty.igood.model.ProdEssay">
+    insert into prod_essay (id, cover, title,
+      content, in_time, update_time,
+      browser_num, send_num, collect_num,
+      prod_ids, descp,author,avatar)
+    values (#{id,jdbcType=INTEGER}, #{cover,jdbcType=VARCHAR}, #{title,jdbcType=VARCHAR},
+      #{content,jdbcType=VARCHAR}, #{inTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP},
+      #{browserNum,jdbcType=INTEGER}, #{sendNum,jdbcType=INTEGER}, #{collectNum,jdbcType=INTEGER},
+      #{prodIds,jdbcType=VARCHAR}, #{descp,jdbcType=VARCHAR},#{author,jdbcType=VARCHAR},#{avatar,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.mtty.igood.model.ProdEssay">
+    insert into prod_essay
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="cover != null">
+        cover,
+      </if>
+      <if test="title != null">
+        title,
+      </if>
+      <if test="content != null">
+        content,
+      </if>
+      <if test="inTime != null">
+        in_time,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+      <if test="browserNum != null">
+        browser_num,
+      </if>
+      <if test="sendNum != null">
+        send_num,
+      </if>
+      <if test="collectNum != null">
+        collect_num,
+      </if>
+      <if test="prodIds != null">
+        prod_ids,
+      </if>
+      <if test="descp != null">
+        descp,
+      </if>
+      <if test="author != null">
+        author,
+      </if>
+      <if test="avatar != null">
+        avatar,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="cover != null">
+        #{cover,jdbcType=VARCHAR},
+      </if>
+      <if test="title != null">
+        #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="content != null">
+        #{content,jdbcType=VARCHAR},
+      </if>
+      <if test="inTime != null">
+        #{inTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="browserNum != null">
+        #{browserNum,jdbcType=INTEGER},
+      </if>
+      <if test="sendNum != null">
+        #{sendNum,jdbcType=INTEGER},
+      </if>
+      <if test="collectNum != null">
+        #{collectNum,jdbcType=INTEGER},
+      </if>
+      <if test="prodIds != null">
+        #{prodIds,jdbcType=VARCHAR},
+      </if>
+      <if test="descp != null">
+        #{descp,jdbcType=VARCHAR},
+      </if>
+      <if test="author != null">
+        #{author,jdbcType=VARCHAR},
+      </if>
+      <if test="avatar != null">
+        #{avatar,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.mtty.igood.model.ProdEssay">
+    update prod_essay
+    <set>
+      <if test="cover != null">
+        cover = #{cover,jdbcType=VARCHAR},
+      </if>
+      <if test="title != null">
+        title = #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="content != null">
+        content = #{content,jdbcType=VARCHAR},
+      </if>
+      <if test="inTime != null">
+        in_time = #{inTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="browserNum != null">
+        browser_num = #{browserNum,jdbcType=INTEGER},
+      </if>
+      <if test="sendNum != null">
+        send_num = #{sendNum,jdbcType=INTEGER},
+      </if>
+      <if test="collectNum != null">
+        collect_num = #{collectNum,jdbcType=INTEGER},
+      </if>
+      <if test="prodIds != null">
+        prod_ids = #{prodIds,jdbcType=VARCHAR},
+      </if>
+      <if test="descp != null">
+        descp = #{descp,jdbcType=VARCHAR},
+      </if>
+      <if test="author != null">
+        author=#{author,jdbcType=VARCHAR},
+      </if>
+      <if test="avatar != null">
+        avatar=#{avatar,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.mtty.igood.model.ProdEssay">
+    update prod_essay
+    set cover = #{cover,jdbcType=VARCHAR},
+      title = #{title,jdbcType=VARCHAR},
+      content = #{content,jdbcType=VARCHAR},
+      in_time = #{inTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      browser_num = #{browserNum,jdbcType=INTEGER},
+      send_num = #{sendNum,jdbcType=INTEGER},
+      collect_num = #{collectNum,jdbcType=INTEGER},
+      prod_ids = #{prodIds,jdbcType=VARCHAR},
+      descp = #{descp,jdbcType=VARCHAR},
+      author = #{author,jdbcType=VARCHAR},
+      avatar = #{avatar,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+</mapper>
